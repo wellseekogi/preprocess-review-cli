@@ -1,0 +1,9 @@
+node_modules/
+*.tgz
+coverage/
+.tmp-*/
+tests/.tmp-*/
+npm-debug.log*
+my-case.json
+my-review.*
+tests/.cli-interface-*/

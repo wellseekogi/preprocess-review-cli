@@ -1,0 +1,43 @@
+{
+  "toolVersion": "0.2.0",
+  "ruleVersion": "0.1.0",
+  "recordedAt": "2026-09-16T12:12:53.168Z",
+  "environment": {
+    "platform": "win32",
+    "node": "v22.17.0",
+    "npm": "10.9.2"
+  },
+  "tests": {
+    "passed": 41,
+    "failed": 0,
+    "command": "npm test"
+  },
+  "install": {
+    "passed": 5,
+    "command": "npm run smoke:install",
+    "offline": true,
+    "globalEnvironmentModified": false,
+    "checks": [
+      "no browser files in package",
+      "installed version",
+      "installed JSON assessment",
+      "strict exit 2 for attention",
+      "installed command shim"
+    ]
+  },
+  "remoteCI": {
+    "executed": false,
+    "templatePath": "docs/ci-workflow.yml",
+    "configured": [
+      "ubuntu-latest",
+      "windows-latest",
+      "macos-latest"
+    ],
+    "nodeVersions": [
+      22,
+      24
+    ],
+    "note": "Workflow not installed: the publishing GitHub OAuth connection lacks workflow scope. Template is included for a repository administrator to enable later."
+  },
+  "frameworkEffectivenessValidated": false
+}

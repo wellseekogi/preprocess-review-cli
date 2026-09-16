@@ -1,0 +1,46 @@
+{
+  "name": "preprocess-review-cli",
+  "version": "0.2.0",
+  "private": true,
+  "description": "CLI research tool for evidence reuse and regulatory review of preprocessing changes",
+  "license": "UNLICENSED",
+  "bin": {
+    "preprocess-review": "bin/preprocess-review.cjs"
+  },
+  "main": "src/engine.cjs",
+  "files": [
+    "bin/",
+    "src/",
+    "examples/",
+    "docs/",
+    "scripts/",
+    "tests/",
+    "README.md",
+    "CHANGELOG.md",
+    "VALIDATION.md",
+    "validation.json",
+    "manifest.json"
+  ],
+  "scripts": {
+    "test": "node scripts/test.cjs",
+    "smoke:install": "node scripts/smoke-install.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "mlops",
+    "preprocessing",
+    "governance",
+    "evidence-reuse",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellseekogi/preprocess-review-cli.git"
+  },
+  "homepage": "https://github.com/wellseekogi/preprocess-review-cli",
+  "bugs": {
+    "url": "https://github.com/wellseekogi/preprocess-review-cli/issues"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "metadata": {
+    "id": "synthetic-population-change",
+    "title": "가상 사례 · 적용 대상 집단 변경",
+    "system": "가상 고위험 시스템 · 기능 확인용",
+    "reviewer": "예제 작성자",
+    "changeSummary": "기존 검사 파일은 그대로지만 새로운 대상 집단에 배포 범위를 확대하는 가상 변경.",
+    "provenance": "synthetic",
+    "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+    "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+  },
+  "context": {
+    "euHighRisk": "yes",
+    "placedOnMarket": "yes",
+    "priorAssessment": "yes",
+    "plannedChange": "yes",
+    "planReference": "가상 변경 계획 PLAN-DEMO-01",
+    "intendedPurposeChanged": "no",
+    "complianceImpact": "yes",
+    "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+  },
+  "evidence": {
+    "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+    "baselinePassed": "yes",
+    "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+    "deterministic": "yes",
+    "dependencyCoverage": "yes",
+    "evaluationScopeUnchanged": "no",
+    "fingerprints": {
+      "before": {
+        "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+        "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+        "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+        "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+        "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+        "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+      },
+      "after": {
+        "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+        "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+        "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+        "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+        "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+        "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+      }
+    }
+  },
+  "change": {
+    "types": [
+      "missing_values"
+    ],
+    "safeguardsChanged": "no",
+    "inputPopulationChanged": "yes",
+    "knownRegression": "no",
+    "tests": [
+      {
+        "domain": "security",
+        "status": "not_run",
+        "reference": "",
+        "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+      },
+      {
+        "domain": "quality",
+        "status": "not_run",
+        "reference": "",
+        "note": ""
+      },
+      {
+        "domain": "fairness",
+        "status": "not_run",
+        "reference": "",
+        "note": "변경된 대상 집단에서 성능·오류 분포 평가가 필요합니다."
+      }
+    ]
+  }
+}

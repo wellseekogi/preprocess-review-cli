@@ -1,0 +1,712 @@
+[
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "paper-mask-removal",
+      "title": "논문 사례 · 패치 제거 전처리 해제",
+      "system": "digits · 로지스틱 회귀 · seed 10 · 오른쪽 아래 5% 오염",
+      "reviewer": "",
+      "changeSummary": "mask_br → identity: 알려진 패치를 제거하던 전처리를 해제",
+      "provenance": "paper",
+      "source": "사용자 제공 MLOps_보안평가_연구논문_ver3.md, 2026-09-16, §6.3. 수치는 원고에서 옮겼으며 도구 제작 과정에서 원 실험을 재실행하지 않았습니다.",
+      "notes": "정상 게이트 359개 예측 CP=1. 독립 시험 정확도는 두 경로 모두 94.17%, 오른쪽 아래 시험 ASR은 0% → 94.15%. 이는 사후 선택된 설명 사례이며, 여러 실패 기전이나 실제 발생 빈도를 뜻하지 않습니다. 실제 평가 지문은 원고만으로 확보하지 않아 비워 두었습니다."
+    },
+    "context": {
+      "euHighRisk": "unknown",
+      "placedOnMarket": "no",
+      "priorAssessment": "no",
+      "plannedChange": "unknown",
+      "planReference": "",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "unknown",
+      "legalContextReference": "통제된 연구 실험. 실제 시장 출시·사용 개시 또는 법정 적합성 평가 이력이 제공되지 않았습니다."
+    },
+    "evidence": {
+      "claim": "원고의 고정 보안 게이트 D(P): ACC ≥ 0.90 및 알려진 패치 ASR ≤ 0.20",
+      "baselinePassed": "yes",
+      "evidenceReference": "원고 §6.3 / 표 6의 seed 10, 오른쪽 아래 5% 오염 모델",
+      "deterministic": "yes",
+      "dependencyCoverage": "unknown",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "",
+          "inputs": "",
+          "labels": "",
+          "evaluator": "",
+          "policy": "",
+          "runtime": ""
+        },
+        "after": {
+          "model": "",
+          "inputs": "",
+          "labels": "",
+          "evaluator": "",
+          "policy": "",
+          "runtime": ""
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "defense_removal"
+      ],
+      "safeguardsChanged": "yes",
+      "inputPopulationChanged": "no",
+      "knownRegression": "yes",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "fail",
+          "reference": "원고 §6.3 / 표 6",
+          "note": "정상 게이트 예측은 모두 같지만 알려진 패치 보안판정이 바뀐 사례. 독립 시험 ASR 94.15%는 게이트 ASR과 구분합니다."
+        },
+        {
+          "domain": "quality",
+          "status": "pass",
+          "reference": "원고 §6.3",
+          "note": "독립 시험 정확도 94.17%. 동일 정확도가 개별 시험 예측의 완전 일치를 뜻하지는 않습니다."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-exact-reuse",
+      "title": "가상 사례 · 고정 평가 입력과 실행 조건 동일",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "동일한 고정 평가를 유지하는 구현 정리",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "refactor"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-normalization",
+      "title": "가상 사례 · 정상 예측은 같지만 정규화 변경",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "정상 표본 예측 일치만 확인한 정규화 변경. 실제 평가 입력 지문은 달라짐.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "unknown",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": ""
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "f184e94aa149541c6b41f0ab4359a2fc29d5d224660f5b16c5e23118b6d7e82e",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "normalization"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "quality",
+          "status": "pass",
+          "reference": "가상 정상 표본 비교 DEMO-02",
+          "note": "정상 표본 비교 통과가 공격 조건의 결과 일치를 뜻하지 않습니다."
+        },
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-missing-evidence",
+      "title": "가상 사례 · 지문과 평가 근거 누락",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "동일한 고정 평가를 유지하는 구현 정리",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "",
+      "deterministic": "yes",
+      "dependencyCoverage": "unknown",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "refactor"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-runtime-change",
+      "title": "가상 사례 · 실행 환경 변경",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "모델과 평가 입력은 같으나 실행 환경·수치 연산 조건의 지문이 달라짐.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "5bb749b2bb1097ec97c1e7c5faa760f190e4b2e6a5a23d0079e2f9078280ff03"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "runtime"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-population-change",
+      "title": "가상 사례 · 적용 대상 집단 변경",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "기존 검사 파일은 그대로지만 새로운 대상 집단에 배포 범위를 확대하는 가상 변경.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "yes",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "no",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "missing_values"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "yes",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        },
+        {
+          "domain": "fairness",
+          "status": "not_run",
+          "reference": "",
+          "note": "변경된 대상 집단에서 성능·오류 분포 평가가 필요합니다."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-no-baseline",
+      "title": "가상 사례 · 이전 통과 기록 없음",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "지문이 같아도 이전 통과 기록이 없어 통과 결과를 재사용할 수 없는 사례.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "no",
+      "evidenceReference": "",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "refactor"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-planned-regression",
+      "title": "가상 사례 · 계획된 변경에서 보안 회귀 발견",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "변경 계획은 문서화했지만 보안 회귀시험이 실패. 계획 문서만으로 면제할 수 없음.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "yes",
+      "planReference": "가상 변경 계획 PLAN-DEMO-01",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "defense_removal"
+      ],
+      "safeguardsChanged": "yes",
+      "inputPopulationChanged": "no",
+      "knownRegression": "yes",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "fail",
+          "reference": "가상 회귀 기록 FAIL-DEMO-01",
+          "note": "요구사항 영향이 없다는 입력과 충돌하므로 책임자의 재검토가 필요합니다."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-purpose-change",
+      "title": "가상 사례 · 모델은 같지만 사용 목적 변경",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "비고위험 용도로 분류됐던 시스템을 새로운 의사결정 목적으로 사용하려는 가상 변경.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "no",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "no",
+      "planReference": "",
+      "intendedPurposeChanged": "yes",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "no",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "refactor"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "metadata": {
+      "id": "synthetic-unplanned-change",
+      "title": "가상 사례 · 최초 평가의 변경 계획 미확인",
+      "system": "가상 고위험 시스템 · 기능 확인용",
+      "reviewer": "예제 작성자",
+      "changeSummary": "고정 검사 근거는 같지만 최초 적합성 평가의 변경 계획을 확인할 수 없어 규제 검토를 별도 요청하는 사례.",
+      "provenance": "synthetic",
+      "source": "이 도구의 기능 확인을 위해 구성한 가상 사례. SHA-256 값은 가상 문자열의 해시이며 실제 모델·평가 자료의 지문이 아닙니다.",
+      "notes": "합성 사례입니다. 현장 연구 결과, 법률 전문가 판정 또는 도구 효과의 실증 근거가 아닙니다."
+    },
+    "context": {
+      "euHighRisk": "yes",
+      "placedOnMarket": "yes",
+      "priorAssessment": "yes",
+      "plannedChange": "unknown",
+      "planReference": "",
+      "intendedPurposeChanged": "no",
+      "complianceImpact": "no",
+      "legalContextReference": "가상 책임자 검토 메모 LEGAL-DEMO-01; 기능 확인용 가정"
+    },
+    "evidence": {
+      "claim": "고정 평가 Q-DEMO-01의 정확도 및 알려진 공격 회귀시험 결과",
+      "baselinePassed": "yes",
+      "evidenceReference": "가상 통과 기록 EVAL-DEMO-01",
+      "deterministic": "yes",
+      "dependencyCoverage": "yes",
+      "evaluationScopeUnchanged": "yes",
+      "fingerprints": {
+        "before": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        },
+        "after": {
+          "model": "a0552d1b47771457a1ecbaa9471d14e3579c22abd36bd3e7c9dabf1f7017504a",
+          "inputs": "ddad9b35c60953d8ca92bc20b4af965087b3563c7bbb22b05cb52b6d95d597fa",
+          "labels": "958028ad777d4efe1ad32ee328d3a8c5eb8a0a3ffc81d72481507cd2b5884fcb",
+          "evaluator": "3ea420f2b7d0ae8b4c7c8df159d40640ee195d225979e8b140ea7cdab9716a27",
+          "policy": "708862d6a325bef4aa0afa342e1289feafb6730e96f3ce16d6b40c6f6f2f48ef",
+          "runtime": "17deb8357ba90c3426368594d055f4e2ac277d85ddc607c4677199f9e0e3730f"
+        }
+      }
+    },
+    "change": {
+      "types": [
+        "refactor"
+      ],
+      "safeguardsChanged": "no",
+      "inputPopulationChanged": "no",
+      "knownRegression": "no",
+      "tests": [
+        {
+          "domain": "security",
+          "status": "not_run",
+          "reference": "",
+          "note": "기존 평가 재사용 조건을 확인하는 가상 사례로 신규 검사를 실행하지 않았습니다."
+        },
+        {
+          "domain": "quality",
+          "status": "not_run",
+          "reference": "",
+          "note": ""
+        }
+      ]
+    }
+  }
+]

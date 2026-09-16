@@ -1,0 +1,164 @@
+{
+  "name": "preprocess-review-cli",
+  "version": "0.2.0",
+  "ruleVersion": "0.1.0",
+  "createdAt": "2026-09-16T12:22:49.139Z",
+  "scope": "Source repository ZIP. The npm tarball excludes repository-only dotfiles such as .gitignore, .gitattributes, and .npmrc.",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 101,
+      "sha256": "e7a2d788bcd03f8846e48840b09c43ba5d6a45e8236bf14ef11a210deb755b0c"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 116,
+      "sha256": "c51a0e61c6edcc3ca73e4a2827aac5bf18c1384ad7bd3ce76a64301fbd2d09fb"
+    },
+    {
+      "path": ".npmrc",
+      "bytes": 45,
+      "sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d"
+    },
+    {
+      "path": "bin/preprocess-review.cjs",
+      "bytes": 109,
+      "sha256": "5c9ca4ad3c2fe3e4dabb0f58ee544e989bca15dc1f2ccdc31fb1a268bf395dbf"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 415,
+      "sha256": "9b0c490808b9d15ae4edc39db6ad2dc19fdd634568a6c9a4b657a72d1966347f"
+    },
+    {
+      "path": "docs/ci-workflow.yml",
+      "bytes": 505,
+      "sha256": "06fe370fa9e2d2771c37759f7755aaa769504befd712bf016a78eec50bb012da"
+    },
+    {
+      "path": "docs/CLI.md",
+      "bytes": 9416,
+      "sha256": "5172bfcddca0b2755b83fbe66307a0ebd064220f80d2164947a17395ce4fd486"
+    },
+    {
+      "path": "docs/FRAMEWORK.md",
+      "bytes": 13381,
+      "sha256": "377a021fb990eff9e4ad31e23620edb61e71a9066f5e5c6b30b7f06d6f303dd4"
+    },
+    {
+      "path": "docs/RELEASE.md",
+      "bytes": 3938,
+      "sha256": "672f11ea8cc2d024b3bb9fe004924efc9d899c8d3822f41c824c1a192ffd311e"
+    },
+    {
+      "path": "docs/RESEARCH_PROTOCOL.md",
+      "bytes": 11119,
+      "sha256": "7e648ca0af195d33744f282b1cb4c8f45097a9ec1a33c52de5ff0dffe5df0428"
+    },
+    {
+      "path": "examples/cases.json",
+      "bytes": 31334,
+      "sha256": "cb30c90a8fb640cbc2879bdd71edfd41f669d0f0f1c8b6c63b99a82130b9d95e"
+    },
+    {
+      "path": "examples/paper-mask-removal.json",
+      "bytes": 2756,
+      "sha256": "105649466efea67f1d346e70508e4c99169e15715dd76169cef4b146b10aa639"
+    },
+    {
+      "path": "examples/synthetic-exact-reuse.json",
+      "bytes": 2998,
+      "sha256": "6006fdd9d5c821fa4f1aedcaa70a01e2729b307c101edc1f9a356a82c1253910"
+    },
+    {
+      "path": "examples/synthetic-missing-evidence.json",
+      "bytes": 2832,
+      "sha256": "60ec6783190f4744f1e4ae3cb84f5257f458148db6217e9d11a08735933273ac"
+    },
+    {
+      "path": "examples/synthetic-no-baseline.json",
+      "bytes": 2993,
+      "sha256": "3ecba87013a9b823435519dca180bbe82ec49de70724ffce4cf04ac90723fb85"
+    },
+    {
+      "path": "examples/synthetic-normalization.json",
+      "bytes": 2996,
+      "sha256": "85da7e2770081ff4985c4b08976545b96171c2c852404eacae87e83ba66d9a06"
+    },
+    {
+      "path": "examples/synthetic-planned-regression.json",
+      "bytes": 2973,
+      "sha256": "88b68883d621dbdbd8f81d7ccdc3b0cabddefd6644ba4d1e290838256aee944a"
+    },
+    {
+      "path": "examples/synthetic-population-change.json",
+      "bytes": 3250,
+      "sha256": "0d82e775a32f3faf6f0d10064c360597dfa8c0c6ff355f617741257a8173403f"
+    },
+    {
+      "path": "examples/synthetic-purpose-change.json",
+      "bytes": 3024,
+      "sha256": "4f33bcddb440457f15a8d8ff3d2abfa339679472deb35c1359a6f9f50a3cb367"
+    },
+    {
+      "path": "examples/synthetic-runtime-change.json",
+      "bytes": 3019,
+      "sha256": "a1ed370d733444e0f7a0276b4350b4a7f00ddd9d75175f06ceee23e523968655"
+    },
+    {
+      "path": "examples/synthetic-unplanned-change.json",
+      "bytes": 3060,
+      "sha256": "1f8aac4d3dfeb807cd16122f6d180c12b081a025f09432a17b551d2cb4266d78"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1041,
+      "sha256": "73eb8c05ed48f50a38f525a3ed6d306f4cfcab11015847aa813542520c15062b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6009,
+      "sha256": "894fc5dad4ab5b6ed62e3d6be789364ec4e8696073ef931bb468f33c3db91391"
+    },
+    {
+      "path": "scripts/smoke-install.cjs",
+      "bytes": 3055,
+      "sha256": "cff425be5277f6338187a5461c9509187a4dba2322fe8418f810409efc19ae97"
+    },
+    {
+      "path": "scripts/test.cjs",
+      "bytes": 520,
+      "sha256": "8ba6b81f0790c0c33fba1e4dd079f2f0af1af837529ad4567bbf9381a5238340"
+    },
+    {
+      "path": "src/cli.cjs",
+      "bytes": 15998,
+      "sha256": "d462f503f260b400dd0e7f81afee852fd5ab85c2fd0ab5807a41402884dcb71e"
+    },
+    {
+      "path": "src/engine.cjs",
+      "bytes": 24532,
+      "sha256": "761c49a42643e7885069c532612fd37386f5ea47238e33dc5a03882971ea888a"
+    },
+    {
+      "path": "tests/cli-interface.test.cjs",
+      "bytes": 14439,
+      "sha256": "056c6038daf566adca4e8195dd8652ec9646bd3ee51eddae1fa7df2aec324c75"
+    },
+    {
+      "path": "tests/engine.test.cjs",
+      "bytes": 8404,
+      "sha256": "f7072f6766dbb85f7585262ecf9117f4cde6fd7d867a3ebe921324b360690726"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1041,
+      "sha256": "0dd145de58a61bb6591b97a631a83b88e8e195de92b56594aa19d073b040912a"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1349,
+      "sha256": "7ef51b8950b3cdedf57dcd3acb889b3688d473ae4e51cfe55df2371acc0cedda"
+    }
+  ]
+}

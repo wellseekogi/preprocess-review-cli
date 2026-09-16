@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "metadata": {
+    "id": "paper-mask-removal",
+    "title": "논문 사례 · 패치 제거 전처리 해제",
+    "system": "digits · 로지스틱 회귀 · seed 10 · 오른쪽 아래 5% 오염",
+    "reviewer": "",
+    "changeSummary": "mask_br → identity: 알려진 패치를 제거하던 전처리를 해제",
+    "provenance": "paper",
+    "source": "사용자 제공 MLOps_보안평가_연구논문_ver3.md, 2026-09-16, §6.3. 수치는 원고에서 옮겼으며 도구 제작 과정에서 원 실험을 재실행하지 않았습니다.",
+    "notes": "정상 게이트 359개 예측 CP=1. 독립 시험 정확도는 두 경로 모두 94.17%, 오른쪽 아래 시험 ASR은 0% → 94.15%. 이는 사후 선택된 설명 사례이며, 여러 실패 기전이나 실제 발생 빈도를 뜻하지 않습니다. 실제 평가 지문은 원고만으로 확보하지 않아 비워 두었습니다."
+  },
+  "context": {
+    "euHighRisk": "unknown",
+    "placedOnMarket": "no",
+    "priorAssessment": "no",
+    "plannedChange": "unknown",
+    "planReference": "",
+    "intendedPurposeChanged": "no",
+    "complianceImpact": "unknown",
+    "legalContextReference": "통제된 연구 실험. 실제 시장 출시·사용 개시 또는 법정 적합성 평가 이력이 제공되지 않았습니다."
+  },
+  "evidence": {
+    "claim": "원고의 고정 보안 게이트 D(P): ACC ≥ 0.90 및 알려진 패치 ASR ≤ 0.20",
+    "baselinePassed": "yes",
+    "evidenceReference": "원고 §6.3 / 표 6의 seed 10, 오른쪽 아래 5% 오염 모델",
+    "deterministic": "yes",
+    "dependencyCoverage": "unknown",
+    "evaluationScopeUnchanged": "yes",
+    "fingerprints": {
+      "before": {
+        "model": "",
+        "inputs": "",
+        "labels": "",
+        "evaluator": "",
+        "policy": "",
+        "runtime": ""
+      },
+      "after": {
+        "model": "",
+        "inputs": "",
+        "labels": "",
+        "evaluator": "",
+        "policy": "",
+        "runtime": ""
+      }
+    }
+  },
+  "change": {
+    "types": [
+      "defense_removal"
+    ],
+    "safeguardsChanged": "yes",
+    "inputPopulationChanged": "no",
+    "knownRegression": "yes",
+    "tests": [
+      {
+        "domain": "security",
+        "status": "fail",
+        "reference": "원고 §6.3 / 표 6",
+        "note": "정상 게이트 예측은 모두 같지만 알려진 패치 보안판정이 바뀐 사례. 독립 시험 ASR 94.15%는 게이트 ASR과 구분합니다."
+      },
+      {
+        "domain": "quality",
+        "status": "pass",
+        "reference": "원고 §6.3",
+        "note": "독립 시험 정확도 94.17%. 동일 정확도가 개별 시험 예측의 완전 일치를 뜻하지는 않습니다."
+      }
+    ]
+  }
+}
