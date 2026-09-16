@@ -7,20 +7,21 @@ const { TextDecoder } = require('node:util');
 const engine = require('./engine.cjs');
 const VERSION = require('../package.json').version;
 const MAX_JSON_BYTES = 2 * 1024 * 1024;
-const COMMANDS = ['check', 'assess', 'batch', 'template', 'init', 'fingerprint'];
+const COMMANDS = ['scan', 'check', 'assess', 'batch', 'template', 'init', 'fingerprint'];
 const versionText = () => `preprocess-review ${VERSION} (ruleVersion ${engine.VERSION})\n`;
 
 function usage(command) {
+  if (command === 'scan') return require('./scan.cjs').usage();
   const header = versionText() + '\n전처리 변경의 평가 근거 재사용 및 별도 규제 검토를 지원하는 오프라인 연구 도구입니다.\n';
   const check = `사용법:\n  preprocess-review ${command === 'assess' ? 'assess' : 'check'} <case.json> [--format text|json|md] [--out report] [--force] [--strict]\n\n기본 출력은 한국어 텍스트이며 기술 판단과 규제 검토를 별도로 표시합니다.\ncheck와 assess는 같은 명령입니다.\n`;
   const batch = '사용법:\n  preprocess-review batch <cases.json> [--format text|json|csv] [--out report] [--force] [--strict]\n\n입력은 사례 객체가 하나 이상 있는 JSON 배열입니다. 기본 출력은 한국어 텍스트입니다.\n';
   const template = `사용법:\n  preprocess-review ${command === 'init' ? 'init' : 'template'} [--out case.json] [--force]\n\n미확인 값을 unknown으로 둔 JSON 입력 양식을 생성합니다. template과 init은 같은 명령입니다.\n`;
   const fingerprint = '사용법:\n  preprocess-review fingerprint <file> [file ...]\n\n실제 로컬 파일 바이트의 SHA-256과 크기를 JSON으로 출력합니다.\n의존성 명세의 완전성이나 평가 주장을 검증하지 않습니다.\n대시로 시작하는 파일명은 -- 뒤에 지정하세요. 파일을 업로드하지 않습니다.\n';
-  const all = '사용법:\n  preprocess-review check <case.json> [--format text|json|md] [--out report] [--force] [--strict]\n  preprocess-review assess <case.json> [동일 옵션]\n  preprocess-review batch <cases.json> [--format text|json|csv] [--out report] [--force] [--strict]\n  preprocess-review template [--out case.json] [--force]\n  preprocess-review init [--out case.json] [--force]\n  preprocess-review fingerprint <file> [file ...]\n  preprocess-review <command> --help\n';
+  const all = '사용법:\n  preprocess-review scan [folder] [--before model.joblib --after model.joblib --data evaluation.csv]\n  preprocess-review scan --demo\n  preprocess-review check <case.json> [--format text|json|md] [--out report] [--force] [--strict]\n  preprocess-review assess <case.json> [동일 옵션]\n  preprocess-review batch <cases.json> [--format text|json|csv] [--out report] [--force] [--strict]\n  preprocess-review template [--out case.json] [--force]\n  preprocess-review init [--out case.json] [--force]\n  preprocess-review fingerprint <file> [file ...]\n  preprocess-review <command> --help\n';
   const body = ['check', 'assess'].includes(command) ? check : command === 'batch' ? batch : ['template', 'init'].includes(command) ? template : command === 'fingerprint' ? fingerprint : all;
   return header + '\n' + body + '\n공통 옵션: --help, -h 도움말 / --version, -v 버전\n' +
     '기존 --out 파일은 --force 없이는 덮어쓰지 않습니다. 입력 파일은 덮어쓰지 않습니다.\n' +
-    '입력 JSON 한도: 2 MB. UTF-8 BOM 허용. 추가 패키지 의존성·네트워크 호출 없음. Node.js 22 이상 필요.\n\n' +
+    '체크리스트 JSON 한도: 2 MB. UTF-8 BOM 허용. Node.js 22 이상 필요. scan의 실제 모델 평가는 별도 Python 환경이 필요합니다.\n\n' +
     '종료 코드: 정상 판단 0 / 입력·명령·파일 오류 1.\n' +
     '--strict(check/assess/batch): 유효한 입력 중 사람의 검토가 필요하면 2.\n' +
     'strict 0은 기술 REUSE_SCOPED 및 규제 DOCUMENTED_PATH 또는 OUT_OF_SCOPE일 때만 반환합니다.\n' +
@@ -189,6 +190,7 @@ function needsAttention(result) {
   return result.technical.code !== 'REUSE_SCOPED' || !['DOCUMENTED_PATH', 'OUT_OF_SCOPE'].includes(result.regulatory.code);
 }
 function run(argv, stdout, stderr) {
+  if (argv[0] === 'scan') return require('./scan.cjs').run(argv.slice(1), { stdout, stderr, writeResult, display });
   const options = parseArgs(argv);
   if (options.command === 'help') { stdout.write(usage(options.topic)); return 0; }
   if (options.command === 'version') { stdout.write(versionText()); return 0; }

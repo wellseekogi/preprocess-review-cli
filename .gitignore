@@ -7,3 +7,13 @@ npm-debug.log*
 my-case.json
 my-review.*
 tests/.cli-interface-*/
+tests/.scan-interface-/
+
+__pycache__/
+*.pyc
+.venv/
+before.joblib
+after.joblib
+evaluation.csv
+attacks.csv
+diagnosis*.json

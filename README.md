@@ -1,93 +1,84 @@
 # Preprocess Review CLI
 
-전처리 변경 후 기존 평가 근거를 재사용할 수 있는지, 어떤 기술적 재시험과 규제 검토가 필요한지 정리하는 **터미널용 연구 도구**입니다. 웹 서버나 브라우저 없이 로컬 JSON을 읽고 한국어 검토 결과를 출력합니다.
+전처리 변경 전후 모델을 실행해 **오류율·예측 변경률·공격 시험 성공률과 검사 정책의 위험 수준**을 보여 주는 터미널용 연구 도구입니다. 수치를 사람이 JSON에 옮겨 적지 않아도 됩니다.
 
-패키지 버전 `0.2.0` · 판단 규칙 버전 `0.1.0` · Node.js `22` 이상.
+버전 `0.3.0` · Node.js `22` 이상. 실제 모델 평가는 Python `3.10` 이상과 모델 학습 환경에 맞는 라이브러리가 필요합니다.
 
-## 바로 실행하기
+## 바로 체험하기
 
-[v0.2.0 릴리스](https://github.com/wellseekogi/preprocess-review-cli/releases/tag/v0.2.0)에서 `preprocess-review-cli-v0.2.0.zip`을 내려받아 압축을 푼 다음, `package.json`이 있는 폴더에서 터미널을 엽니다.
+[v0.3.0 릴리스](https://github.com/wellseekogi/preprocess-review-cli/releases/tag/v0.3.0)에서 ZIP을 풀고, `package.json`이 있는 폴더에서 실행합니다.
 
-```powershell
-node --version
+~~~text
+node bin/preprocess-review.cjs scan --demo
+~~~
 
-# 원고에 보고된 패치 제거 전처리 해제 사례를 검토합니다.
-node bin/preprocess-review.cjs check examples/paper-mask-removal.json
+추가 설치 없이 합성 전처리·분류 함수를 실제 실행하는 예제입니다. 정상 오류율은 그대로지만 방어 전처리를 해제한 뒤 준비된 공격의 성공률이 올라가는 상황을 보여 줍니다. **사용자 모델 진단이나 논문 실험의 재현 결과가 아닙니다.**
 
-# 고정 평가의 제한적 재사용 조건을 설명하는 합성 사례입니다.
-node bin/preprocess-review.cjs check examples/synthetic-exact-reuse.json
+## 내 모델 자동 진단
 
-# 포함된 모든 사례를 요약합니다.
-node bin/preprocess-review.cjs batch examples/cases.json
-```
+첫 지원 범위는 **scikit-learn 분류 모델 또는 전처리를 포함한 Pipeline의 joblib 파일 + 숫자 CSV**입니다. 변경 전후의 실행 가능한 경로를 두 파일로 준비하고, 평가 데이터에 정답을 포함해야 합니다. 임의 프로젝트 코드나 모든 모델 형식을 자동 해석하지는 않습니다.
 
-별도의 라이브러리를 설치할 필요가 없습니다. 기본 출력은 사람이 읽는 한국어 텍스트이며, 기술적 결과와 규제 검토 결과를 구분해서 보여 줍니다. 원고 사례는 기존 결과를 옮긴 자료이고, 합성 사례는 동작 설명용입니다. 이 명령이 모델 추론이나 보안 시험을 새로 실행하는 것은 아닙니다.
-원고 예시의 실제 출력 중 일부입니다.
+모델 학습에 사용한 Python 환경에 필요한 라이브러리가 있다면 그 환경을 그대로 사용하세요. 새 평가 환경에서는 다운로드한 폴더에서 설치합니다.
 
-```text
-[기술 평가]
-INVALIDATED — 기존 평가 근거 무효화 — 실패 또는 회귀 확인
+~~~text
+python -m pip install -r requirements-scan.txt
+~~~
 
-[규제 검토]
-OUT_OF_SCOPE — 제43조(4)의 해당 경로 적용 대상 밖
-```
+학습 당시와 다른 scikit-learn 버전으로 저장된 모델을 읽으려 하면 중단합니다. `--python`으로 알맞은 환경의 실행 파일을 지정할 수 있습니다. joblib은 코드를 실행할 수 있으므로 본인이 신뢰하는 모델만 사용하세요.
 
-이 예시는 원고의 실패 기록을 입력했으므로 기존 통과 근거를 재사용하지 않습니다. 출시 전 연구 사례로 입력되어 특정 규제 검토 경로 밖으로 표시되며, 일반적인 전처리 변경의 법적 면제를 뜻하지 않습니다.
+다음 파일을 같은 폴더에 둡니다.
 
-## 내 사례 만들기
+- `before.joblib`: 변경 전 모델과 전처리.
+- `after.joblib`: 변경 후 모델과 전처리.
+- `evaluation.csv`: `id,label,특성 열들`을 갖는 정상 평가 데이터.
+- `attacks.csv`(선택): `id,clean_id,attack_target,동일 특성 열들`을 갖는 준비된 공격 데이터.
 
-```powershell
-node bin/preprocess-review.cjs template --out my-change.json
+~~~text
+node bin/preprocess-review.cjs scan ./my-evaluation
+~~~
 
-# 생성한 JSON에서 확인한 사실, 근거 참조와 지문을 직접 채운 뒤 실행합니다.
-node bin/preprocess-review.cjs check my-change.json
-node bin/preprocess-review.cjs check my-change.json --format md --out review.md
-node bin/preprocess-review.cjs check my-change.json --format json --out review.json
-```
+로컬 명령으로 한 번 설치하면 프로젝트 폴더에서 아래 명령만 실행할 수 있습니다.
 
-빈 템플릿은 확인되지 않은 항목을 `unknown`으로 둡니다. 지문이나 근거가 부족하면 재사용을 보류합니다. 시험 하나의 통과나 모델 파일의 일치만으로 재사용을 승인하지 않습니다.
-
-원한다면 현재 폴더를 로컬 명령으로 설치할 수 있습니다.
-
-```powershell
+~~~text
 npm install --global .
-preprocess-review check examples/paper-mask-removal.json
-```
+preprocess-review scan
+~~~
 
-여기서 `.`은 다운로드한 현재 폴더입니다. npm 레지스트리에 패키지를 공개한 상태가 아니므로 다운로드 없이 레지스트리 패키지명으로 설치하는 배포 방식은 제공하지 않습니다.
+다른 파일명을 쓰면 경로만 지정합니다. 측정 수치나 위험 수준을 직접 적지 않습니다.
 
-## 결과 읽기
+~~~text
+preprocess-review scan --before old.joblib --after new.joblib --data test.csv --attacks attacks.csv
+preprocess-review scan --format json --out diagnosis.json
+~~~
 
-| 기술적 코드 | 의미 |
-| --- | --- |
-| `REUSE_SCOPED` | 제출된 조건상 명시된 고정 평가 결과의 제한적 재사용 조건 충족 |
-| `RETEST_REQUIRED` | 관련 평가 의존성이나 범위가 달라져 재시험 필요 |
-| `HOLD` | 입력 오류 또는 근거 부족으로 판단 보류 |
-| `INVALIDATED` | 회귀 또는 시험 실패가 입력되어 기존 통과 근거의 재사용 불가 |
+[입력 CSV 형식·모델 지원 범위·판정 기준](docs/AUTO_SCAN.md)을 참고하세요. 공격 데이터가 없으면 정상 성능만 측정하고 보안 위험을 낮음으로 단정하지 않습니다. 시험 데이터와 어떤 공격을 평가할지는 사용자가 선택해야 합니다.
 
-규제 결과는 별도로 `REVIEW_REQUIRED`, `CONTEXT_REQUIRED`, `OUT_OF_SCOPE`, `DOCUMENTED_PATH`를 표시합니다. 문서화된 경로와 특정 조항 경로 밖이라는 결과는 법적 승인이나 전체 법률의 적용 제외를 뜻하지 않습니다.
+## 결과의 의미
 
-## 자동화와 근거의 한계
+- **측정 비율:** 제공한 표본의 정상 오류율, 예측 변경률, 새 오류와 준비된 공격의 성공 비율.
+- **위험 등급:** 관측된 악화·변화와 표본 범위에 따른 공개된 연구용 검사 규칙. 통계적으로 보정된 사고 확률이 아닙니다.
+- **근거 기록:** 읽은 모델·데이터의 SHA-256, 실행 환경, 표본 수, 분모와 제외 사유를 JSON에 보관합니다.
 
-```powershell
-# 사람이 확인해야 하는 결과를 종료 코드 2로 구분합니다.
-node bin/preprocess-review.cjs check my-change.json --strict
+법적 재인증 여부나 알 수 없는 공격의 성공확률을 자동 확정하지 않습니다. `--assume-iid`를 직접 지정한 경우에만 표집 가정에 조건부인 Wilson 95% 구간을 표시합니다.
 
-# 지정한 파일의 실제 SHA-256을 계산합니다.
-node bin/preprocess-review.cjs fingerprint model.bin evaluation-inputs.bin
-```
+## 기존 거버넌스 체크리스트
 
-기본 모드에서는 검토 필요 결과도 정상 실행이면 종료 코드 `0`입니다. 입력·파일 오류는 `1`입니다. `--strict`는 기술적 결과가 `REUSE_SCOPED`이고 규제 결과가 `DOCUMENTED_PATH` 또는 `OUT_OF_SCOPE`일 때만 `0`, 그 외 유효한 검토 결과는 `2`로 구분합니다. **`--strict`의 `0`도 배포 허가나 법적 판정이 아닙니다.**
+기술적 평가 근거 재사용과 규제 검토 항목을 별도로 정리하는 v0.2 명령도 유지합니다.
 
-입력 JSON에 적은 시험 결과·지문·의존성 조건은 사용자의 선언입니다. `fingerprint`는 실제 파일 바이트를 계산하지만 해당 파일이 평가에 사용되었는지, 필요한 의존성이 빠짐없이 포함되었는지 확인하지 않습니다. 모델, 실제 검사 입력, 정답, 평가기, 정책, 실행 조건의 동일성은 명시된 고정 평가에 한해서 해석해야 합니다.
+~~~text
+node bin/preprocess-review.cjs check examples/paper-mask-removal.json
+node bin/preprocess-review.cjs template --out my-change.json
+~~~
 
-## 자세한 문서
+`check`는 입력된 선언을 분류하며 모델 시험을 실행하지 않습니다. `scan`은 지원하는 모델 경로를 실제 실행합니다. 원고에서 옮긴 체크리스트 사례 1개, 합성 체크리스트 9개, 새 합성 실행 데모를 서로 다른 근거로 구분합니다.
 
-- [명령·입력·종료 코드](docs/CLI.md)
-- [분류체계·체크리스트와 법 조항 매핑](docs/FRAMEWORK.md)
-- [향후 비교 평가 연구 계획](docs/RESEARCH_PROTOCOL.md)
-- [다운로드·설치와 배포 정보](docs/RELEASE.md)
+## 문서
 
-규제 매핑은 EU AI Act의 **2024년 제정문** Article 3(23), Article 43(4), Annex IV 2(f)를 참고한 연구용 제안입니다. 현행 법령을 자동 조회하지 않으며, 계속 학습 시스템의 예정된 변경에 관한 규정을 모든 계획된 변경의 면제로 적용하지 않습니다.
+- [자동 진단 사용법](docs/AUTO_SCAN.md)
+- [기존 명령·입력·종료 코드](docs/CLI.md)
+- [분류체계와 2024년 EU AI Act 제정문 매핑](docs/FRAMEWORK.md)
+- [후속 연구 계획](docs/RESEARCH_PROTOCOL.md)
+- [다운로드와 배포 정보](docs/RELEASE.md)
+- [구현 검증 기록](VALIDATION.md)
 
-분류체계의 거버넌스 효과를 검증한 사용자 연구는 아직 없습니다. 원고의 단일 방어 기능 제거 기전, 합성 예시, 소프트웨어 동작 검사를 각각 다른 근거 수준으로 구분합니다. 소스와 다운로드 파일은 [GitHub](https://github.com/wellseekogi/preprocess-review-cli)에서 제공합니다. npm 레지스트리에는 게시하지 않습니다. 라이선스 선택 전 패키지 표시는 `UNLICENSED`입니다.
+소스와 배포 파일은 [GitHub](https://github.com/wellseekogi/preprocess-review-cli)에서 제공합니다. npm 레지스트리에는 게시하지 않습니다. 라이선스 선택 전 상태 `UNLICENSED`입니다. 거버넌스 효과나 위험 등급의 현장 타당성에 대한 사용자 연구는 아직 수행하지 않았습니다.

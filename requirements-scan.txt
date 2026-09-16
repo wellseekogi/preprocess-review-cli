@@ -1,0 +1,6 @@
+# Optional local scan runner dependencies. Use versions compatible with the
+# environment that trained your trusted model; no package is installed at run time.
+numpy>=1.26,<3
+pandas>=2.2,<4
+scikit-learn>=1.5,<2
+joblib>=1.4,<2

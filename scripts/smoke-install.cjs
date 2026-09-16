@@ -20,9 +20,11 @@ try{
  const casePath=path.join(installed,'examples/paper-mask-removal.json');
  const report=run(['check',casePath,'--format','json']);assert.equal(report.status,0,report.stderr);assert.equal(JSON.parse(report.stdout).technical.code,'INVALIDATED');
  const strict=run(['check',casePath,'--strict','--format','json']);assert.equal(strict.status,2,strict.stderr);
+ const demo=run(['scan','--demo','--format','json']);assert.equal(demo.status,0,demo.stderr);assert.equal(JSON.parse(demo.stdout).analysis.risk.level,'HIGH');
+ assert.ok(fs.existsSync(path.join(installed,'python/runner.py'))&&fs.existsSync(path.join(installed,'requirements-scan.txt')),'Python scan files are packaged');
  const command=process.platform==='win32'?cp.spawnSync(process.env.ComSpec||'cmd.exe',['/d','/c','.\\node_modules\\.bin\\preprocess-review.cmd --version'],{cwd:consumer,env,encoding:'utf8'}):cp.spawnSync(path.join(consumer,'node_modules/.bin/preprocess-review'),['--version'],{cwd:consumer,env,encoding:'utf8'});
  assert.equal(command.status,0,command.stderr);assert.ok(command.stdout.includes(pkg.version));
- console.log(JSON.stringify({package:pkg.name,version:pkg.version,node:process.version,platform:process.platform,tarballFiles:pack.files.length,offlineInstall:true,installedCommand:true,checks:['no browser files','version','JSON assessment','strict attention exit','installed command shim'],passed:5},null,2));
+ console.log(JSON.stringify({package:pkg.name,version:pkg.version,node:process.version,platform:process.platform,tarballFiles:pack.files.length,offlineInstall:true,installedCommand:true,checks:['no browser files','version','JSON assessment','strict attention exit','installed command shim','installed scan demo','Python scan files'],passed:7},null,2));
 }finally{
  const resolved=path.resolve(temp);
  if(path.dirname(resolved)!==root||!path.basename(resolved).startsWith('.tmp-install-'))throw new Error('Unsafe cleanup path');

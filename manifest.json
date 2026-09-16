@@ -1,19 +1,20 @@
 {
   "name": "preprocess-review-cli",
-  "version": "0.2.0",
-  "ruleVersion": "0.1.0",
-  "createdAt": "2026-09-16T12:22:49.139Z",
-  "scope": "Source repository ZIP. The npm tarball excludes repository-only dotfiles such as .gitignore, .gitattributes, and .npmrc.",
+  "version": "0.3.0",
+  "governanceRuleVersion": "0.1.0",
+  "measurementVersion": "0.1.0",
+  "createdAt": "2026-09-16T12:58:40.200Z",
+  "scope": "Source repository ZIP. The npm tarball excludes repository-only dotfiles such as .gitignore, .gitattributes and .npmrc.",
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 101,
-      "sha256": "e7a2d788bcd03f8846e48840b09c43ba5d6a45e8236bf14ef11a210deb755b0c"
+      "bytes": 143,
+      "sha256": "94f2eec43394ff76dc22787da874e1944597cfccf5f251c91c920877b5ce2cd8"
     },
     {
       "path": ".gitignore",
-      "bytes": 116,
-      "sha256": "c51a0e61c6edcc3ca73e4a2827aac5bf18c1384ad7bd3ce76a64301fbd2d09fb"
+      "bytes": 237,
+      "sha256": "d1c9cee6b0c8a8385ce85e061bbee1e1497c8582a79eb454d97087a2262385da"
     },
     {
       "path": ".npmrc",
@@ -21,24 +22,34 @@
       "sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d"
     },
     {
+      "path": "CHANGELOG.md",
+      "bytes": 841,
+      "sha256": "0457aba1eca755ee0eac486c0d59e5acda7843e88d770e973c99096be1d0bedc"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5036,
+      "sha256": "fd8d22b727733f9db70c19097e7791c62afe93818e98cecec8691455076c3eba"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1572,
+      "sha256": "0f2016bd812a606eb261c15f227f12354ae5d2e5fba7ef39054df16d836ee712"
+    },
+    {
       "path": "bin/preprocess-review.cjs",
       "bytes": 109,
       "sha256": "5c9ca4ad3c2fe3e4dabb0f58ee544e989bca15dc1f2ccdc31fb1a268bf395dbf"
     },
     {
-      "path": "CHANGELOG.md",
-      "bytes": 415,
-      "sha256": "9b0c490808b9d15ae4edc39db6ad2dc19fdd634568a6c9a4b657a72d1966347f"
-    },
-    {
-      "path": "docs/ci-workflow.yml",
-      "bytes": 505,
-      "sha256": "06fe370fa9e2d2771c37759f7755aaa769504befd712bf016a78eec50bb012da"
+      "path": "docs/AUTO_SCAN.md",
+      "bytes": 7230,
+      "sha256": "f82e8e7d61af9a460a4ef7b608a6c38ded0a67a3cb28e749fcfe8edd7427c58e"
     },
     {
       "path": "docs/CLI.md",
-      "bytes": 9416,
-      "sha256": "5172bfcddca0b2755b83fbe66307a0ebd064220f80d2164947a17395ce4fd486"
+      "bytes": 9571,
+      "sha256": "81fc02580cae9c827dff8b1a11b1932e6106ee16687554cb70bb04aa5465e564"
     },
     {
       "path": "docs/FRAMEWORK.md",
@@ -47,13 +58,18 @@
     },
     {
       "path": "docs/RELEASE.md",
-      "bytes": 3938,
-      "sha256": "672f11ea8cc2d024b3bb9fe004924efc9d899c8d3822f41c824c1a192ffd311e"
+      "bytes": 4197,
+      "sha256": "eae7937bddfd61388bcf3eb3044d7ad47ce3cd935773223050f386af65fae291"
     },
     {
       "path": "docs/RESEARCH_PROTOCOL.md",
       "bytes": 11119,
       "sha256": "7e648ca0af195d33744f282b1cb4c8f45097a9ec1a33c52de5ff0dffe5df0428"
+    },
+    {
+      "path": "docs/ci-workflow.yml",
+      "bytes": 505,
+      "sha256": "06fe370fa9e2d2771c37759f7755aaa769504befd712bf016a78eec50bb012da"
     },
     {
       "path": "examples/cases.json",
@@ -112,18 +128,28 @@
     },
     {
       "path": "package.json",
-      "bytes": 1041,
-      "sha256": "73eb8c05ed48f50a38f525a3ed6d306f4cfcab11015847aa813542520c15062b"
+      "bytes": 1071,
+      "sha256": "e90d1e037cc9841197b5014af9647f87aa47a1ed991a97df6f23e1e74fc06c5f"
     },
     {
-      "path": "README.md",
-      "bytes": 6009,
-      "sha256": "894fc5dad4ab5b6ed62e3d6be789364ec4e8696073ef931bb468f33c3db91391"
+      "path": "python/runner.py",
+      "bytes": 22032,
+      "sha256": "985ebe25e73351e122146cd9a98349b821a95f54c548d3ba2129dab548c65585"
+    },
+    {
+      "path": "python/test_runner.py",
+      "bytes": 16140,
+      "sha256": "3011457dc869b69cc23924b81ece8619fec06837ea75fa02abfc5c403fe6939d"
+    },
+    {
+      "path": "requirements-scan.txt",
+      "bytes": 226,
+      "sha256": "242a77b88d1303d4364c4a0a0f6cffbccb7ee98734335447579dc1e5b5a4e078"
     },
     {
       "path": "scripts/smoke-install.cjs",
-      "bytes": 3055,
-      "sha256": "cff425be5277f6338187a5461c9509187a4dba2322fe8418f810409efc19ae97"
+      "bytes": 3418,
+      "sha256": "8a9c76446011581c4d1045d0948ca5cdedbd21efddc2dd4182f4132c5a904dc8"
     },
     {
       "path": "scripts/test.cjs",
@@ -132,8 +158,8 @@
     },
     {
       "path": "src/cli.cjs",
-      "bytes": 15998,
-      "sha256": "d462f503f260b400dd0e7f81afee852fd5ab85c2fd0ab5807a41402884dcb71e"
+      "bytes": 16348,
+      "sha256": "64381911e904b46d06292f7590a81f567feafd2c1b5d24e1821f6b5dc76bb18f"
     },
     {
       "path": "src/engine.cjs",
@@ -141,9 +167,19 @@
       "sha256": "761c49a42643e7885069c532612fd37386f5ea47238e33dc5a03882971ea888a"
     },
     {
+      "path": "src/scan-metrics.cjs",
+      "bytes": 16760,
+      "sha256": "e067fc5127231b01d4671123e32c4ff82f0e906f44bedd2ac3b75009a00b6fd6"
+    },
+    {
+      "path": "src/scan.cjs",
+      "bytes": 11585,
+      "sha256": "570431142d60cef8f61a45279b99ea68547070da1ecace3e8fc7d111871713ed"
+    },
+    {
       "path": "tests/cli-interface.test.cjs",
-      "bytes": 14439,
-      "sha256": "056c6038daf566adca4e8195dd8652ec9646bd3ee51eddae1fa7df2aec324c75"
+      "bytes": 14466,
+      "sha256": "44d51f87087a3560237ee253bee5e0314967d9d21164736e5c174d999cb8a71e"
     },
     {
       "path": "tests/engine.test.cjs",
@@ -151,14 +187,19 @@
       "sha256": "f7072f6766dbb85f7585262ecf9117f4cde6fd7d867a3ebe921324b360690726"
     },
     {
-      "path": "validation.json",
-      "bytes": 1041,
-      "sha256": "0dd145de58a61bb6591b97a631a83b88e8e195de92b56594aa19d073b040912a"
+      "path": "tests/scan-interface.test.cjs",
+      "bytes": 3662,
+      "sha256": "17d772e971806e548d5ee93eb850c748b583d14f26796a2be7f82ad67f195a8c"
     },
     {
-      "path": "VALIDATION.md",
-      "bytes": 1349,
-      "sha256": "7ef51b8950b3cdedf57dcd3acb889b3688d473ae4e51cfe55df2371acc0cedda"
+      "path": "tests/scan-metrics.test.cjs",
+      "bytes": 10222,
+      "sha256": "2bef47ed638d2407a406b8b1482c2c00b8067cad664c5467fd7f1746fd443b9e"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1540,
+      "sha256": "254d9d86c2010a6367d2096abc2e8f9f3e65944fa7581fa5f26f5b4c70f6e9c6"
     }
   ]
 }

@@ -1,43 +1,51 @@
 {
-  "toolVersion": "0.2.0",
-  "ruleVersion": "0.1.0",
-  "recordedAt": "2026-09-16T12:12:53.168Z",
+  "toolVersion": "0.3.0",
+  "governanceRuleVersion": "0.1.0",
+  "measurementVersion": "0.1.0",
+  "riskPolicyVersion": "demo-conservative-0.1",
+  "recordedAt": "2026-09-16T12:58:40.167Z",
   "environment": {
     "platform": "win32",
     "node": "v22.17.0",
-    "npm": "10.9.2"
+    "npm": "10.9.2",
+    "python": "3.13.5",
+    "sklearn": "1.9.1",
+    "numpy": "2.1.2",
+    "pandas": "2.3.0",
+    "joblib": "1.6.0"
   },
   "tests": {
-    "passed": 41,
-    "failed": 0,
-    "command": "npm test"
-  },
-  "install": {
-    "passed": 5,
-    "command": "npm run smoke:install",
-    "offline": true,
-    "globalEnvironmentModified": false,
-    "checks": [
-      "no browser files in package",
-      "installed version",
-      "installed JSON assessment",
-      "strict exit 2 for attention",
-      "installed command shim"
-    ]
+    "node": {
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "command": "npm test"
+    },
+    "python": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "command": "python python/test_runner.py"
+    },
+    "install": {
+      "passed": 7,
+      "failed": 0,
+      "command": "npm run smoke:install"
+    },
+    "integration": {
+      "passed": 2,
+      "scope": "Node CLI to Python inference on generated sklearn pipelines and CSVs; new attack regression and identical-pipeline scoped result"
+    }
   },
   "remoteCI": {
     "executed": false,
     "templatePath": "docs/ci-workflow.yml",
-    "configured": [
-      "ubuntu-latest",
-      "windows-latest",
-      "macos-latest"
-    ],
-    "nodeVersions": [
-      22,
-      24
-    ],
-    "note": "Workflow not installed: the publishing GitHub OAuth connection lacks workflow scope. Template is included for a repository administrator to enable later."
+    "reason": "Publishing OAuth connection lacks workflow scope; template is not an active workflow."
   },
+  "evidenceLimits": [
+    "Generated synthetic data and pipeline fixtures are implementation tests, not user model results or paper experiment replication.",
+    "Risk policy and minimum sample count are engineering heuristics, not a calibrated probability of operational incidents.",
+    "Only the recorded Windows environment was executed locally."
+  ],
   "frameworkEffectivenessValidated": false
 }

@@ -64,7 +64,7 @@ test('global help and version describe the CLI package', () => {
   }
   const version = run(['--version']);
   assert.equal(version.status, 0, version.stderr);
-  assert.match(version.stdout, /\b0\.2\.0\b/);
+  assert.ok(version.stdout.includes(require('../package.json').version));
   assert.equal(version.stderr, '');
 });
 

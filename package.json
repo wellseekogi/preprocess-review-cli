@@ -1,8 +1,8 @@
 {
   "name": "preprocess-review-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "CLI research tool for evidence reuse and regulatory review of preprocessing changes",
+  "description": "CLI for measured preprocessing-change diagnostics and evidence review",
   "license": "UNLICENSED",
   "bin": {
     "preprocess-review": "bin/preprocess-review.cjs"
@@ -19,7 +19,9 @@
     "CHANGELOG.md",
     "VALIDATION.md",
     "validation.json",
-    "manifest.json"
+    "manifest.json",
+    "python/",
+    "requirements-scan.txt"
   ],
   "scripts": {
     "test": "node scripts/test.cjs",
